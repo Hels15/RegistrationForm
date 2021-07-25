@@ -1,41 +1,69 @@
 import QtQuick
 import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
+
 
 Window {
     width: 640
     height: 480
     visible: true
-    title: "RegistrationForm"
+    title: "Registration Form"
+    Text{
+        text:Clock.current_time
+        font.pixelSize: 30
 
-
-    Rectangle{
-        id: red_rectangle
-        x:200
-        y:100
-        width: 100
-        height: 100
-        color: "Red"
-        radius: 20
-        rotation: 45
+    }
 
 
 
-        Rectangle{
+    ColumnLayout{
+        width: parent.width / 2
+        anchors.centerIn: parent
 
-            width: 50
-            height: 50
-            color: "Green"
-            radius: 10
-            x: 30
-
-            MouseArea{
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-
-
-                onClicked: red_rectangle.width = 200
-
-            }
+        TextField{
+            id: first_name_field
+            Layout.fillWidth: true
+            placeholderText: "First name"
         }
+
+        TextField{
+            id: last_name_field
+            Layout.fillWidth: true
+            placeholderText: "Last name"
+        }
+
+        TextField{
+            id: phone_field
+            Layout.fillWidth: true
+            placeholderText: "Phone"
+        }
+
+        TextField{
+            id: email_field
+            Layout.fillWidth: true
+            placeholderText: "Email"
+        }
+
+        TextField{
+            id: address_field
+            Layout.fillWidth: true
+            placeholderText: "Address"
+        }
+    }
+
+    Button{
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 20
+        width: 100
+        height: 50
+        text: "Save"
+
+        onClicked: DataManager.save_action(first_name_field.text,
+                                           last_name_field.text,
+                                           phone_field.text,
+                                           email_field.text,
+                                           address_field.text)
     }
 }
